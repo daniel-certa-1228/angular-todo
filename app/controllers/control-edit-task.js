@@ -1,4 +1,5 @@
 "use strict";
+// console.log( "control-edit-task.js" );
 
 /*
     
@@ -10,11 +11,11 @@ app.controller("editTaskCtrl", function($scope, todoFactory){
 
     const showEditTask = function(){
 
-    }
+    };
 
     const submitTask = function(){
 
-    }
+    };
 
 
 
