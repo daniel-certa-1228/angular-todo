@@ -24,8 +24,17 @@ app.factory("todoFactory", function($q, $http, FBCreds){
         });
     };
 
-    const addTask = function(){
-
+    const addTask = function(obj){
+        let newObj = JSON.stringify(obj);
+        return $http.post(`${FBCreds.databaseURL}/items.json`, newObj)
+        .then((data) => {
+            console.log( "data", data );
+            return (data);
+        }, (error) => {
+            let errorCode = error.code;
+            let errorMessage = error.message;
+            console.log( "error", errorCode, errorMessage );
+        });
     };
 
     const editTask = function(id, obj) {
@@ -42,8 +51,16 @@ app.factory("todoFactory", function($q, $http, FBCreds){
         });
     };
 
-    const deleteTask = function(){
-
+    const deleteTask = function(id){
+        return $q((resolve, reject) => {
+            $http.delete(`${FBCreds.databaseURL}/items/${id}.json`)
+            .then((response) => {
+                resolve(response);
+            })
+            .catch((error) => {
+                reject(error);
+            });
+        });
     };
 
     const getSingleTask = function(itemId){

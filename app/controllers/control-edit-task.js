@@ -1,24 +1,22 @@
 "use strict";
 // console.log( "control-edit-task.js" );
-
-/*
-    
+/*   
     handle data and provide functionality to edit a task
-
  */
-
 app.controller("editTaskCtrl", function($scope, todoFactory, $routeParams, $location){
 
-   	$scope.title = "New Task";
-    	$scope.submitButtonText = "Edit Item";
+   	$scope.title = "Edit Task";
+    $scope.submitButtonText = "Edit Item";
 
-    	$scope.task = {
-    		assignedTo: "",
-    		dependecies: "",
-    		dueDate: "",
-    		task: "",
-    		isCompleted: ""
-    	};
+    $scope.task = {
+        assignedTo: "",
+        dependecies: "",
+        dueDate: "",
+        urgency: "",
+        task: "",
+        isCompleted: "",
+        location: ""
+    };
 
 
     const showEditTask = function(){

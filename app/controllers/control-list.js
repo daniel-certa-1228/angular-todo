@@ -17,8 +17,11 @@ app.controller("listCtrl", function($scope, todoFactory, userFactory) {
     };
 
     
-    const deleteTask = function(){
-
+    $scope.deleteTask = function(id){
+        todoFactory.deleteTask(id)
+        .then(() => {
+            showAllTasks();
+        });
     };
 
     
