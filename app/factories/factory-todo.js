@@ -28,8 +28,18 @@ app.factory("todoFactory", function($q, $http, FBCreds){
 
     };
 
-    const editTask = function() {
-
+    const editTask = function(id, obj) {
+        console.log( "id, obj", id, obj );
+        return $q((resolve, reject) => {
+            let newObj = JSON.stringify(obj);
+            $http.patch(`${FBCreds.databaseURL}/items/${id}.json`, newObj)
+            .then((data) => {
+                resolve(data);
+            })
+            .catch((error) => {
+                reject(error);
+            });
+        });
     };
 
     const deleteTask = function(){
