@@ -5,10 +5,11 @@
     using todoFactory to write to the database
  */
 
-app.controller("addTaskCtrl", function($scope, todoFactory, $location){
+app.controller("addTaskCtrl", function($scope, todoFactory, $location, userFactory){
 
 	$scope.title = "New Task";
 	$scope.submitButtonText = "Add New Task";
+	let user = userFactory.getCurrentUser();
 
 	$scope.task = {
 		assignedTo: "",
@@ -17,7 +18,8 @@ app.controller("addTaskCtrl", function($scope, todoFactory, $location){
 		urgency: "",
 		task: "",
 		isCompleted: false,
-		location: ""
+		location: "",
+		uid: user
 	};
 
     $scope.submitTask = function(){

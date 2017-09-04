@@ -25,26 +25,33 @@ app.factory("userFactory", function($q, $http){
     };
 
     const getCurrentUser = function(){
-
+        return currentUser;
     };
 
 
-    const loginGoogle = function(){
-
-    };
-
-
-    const logIn = function(){
-
+    const logIn = function(userObj){
+        return firebase.auth().signInWithEmailAndPassword(userObj.email, userObj.password)
+        .catch( function(error) {
+            let errorCode = error.code;
+            let errorMessage = error.message;
+            console.log( "error", errorCode, errorMessage );
+        });
     };
 
 
     const logOut = function(){
-
+        console.log( "logout user" );
+        return firebase.auth().signOut();
     };
 
 
-    const register = function(){
+    const register = function(userObj){
+        return firebase.auth().createUserWithEmailAndPassword(userObj.email, userObj.password)
+        .catch( function(error) {
+            let errorCode = error.code;
+            let errorMessage = error.message;
+            console.log( "error", errorCode, errorMessage );
+        });
 
     };
 
@@ -58,5 +65,5 @@ app.factory("userFactory", function($q, $http){
         return firebase.auth().signInWithPopup(provider);
     };
 
-    return {getCurrentUser, loginGoogle, logIn, logOut, register, isAuthenticated, authWithProvider};
+    return {getCurrentUser, logIn, logOut, register, isAuthenticated, authWithProvider};
 });
