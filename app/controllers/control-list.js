@@ -7,9 +7,10 @@
 app.controller("listCtrl", function($scope, todoFactory, userFactory) {
 
 	$scope.tasks = [];
+    let user = userFactory.getCurrentUser();
 
     const showAllTasks = function(){
-    	todoFactory.getAllTasks()
+    	todoFactory.getAllTasks(user)
     	.then((tasks) => {
     		console.log( "showAllTasks from promise", tasks );
     		$scope.tasks = tasks;
@@ -17,13 +18,24 @@ app.controller("listCtrl", function($scope, todoFactory, userFactory) {
     };
 
     
-    const deleteTask = function(){
-
+    $scope.deleteTask = function(id){
+        todoFactory.deleteTask(id)
+        .then(() => {
+            showAllTasks();
+        });
     };
 
     
-    const toggleDoneTask = function(){
-
+    $scope.toggleDoneTask = function(obj){
+    	console.log( "toggle", obj );
+    	//ternary is backwards because angular is changing the DOM before the the database call
+    	let status = obj.isCompleted ? true : false;
+    	let tempObj = {isCompleted:status};
+    	todoFactory.editTask(obj.id, tempObj)
+    	.then(() => {
+    		console.log( "then is updated" );
+    		showAllTasks();
+    	});
     };
 
     showAllTasks();
