@@ -11,7 +11,7 @@
     </div>
 </div>
 
-<div ng-repeat="thingy in tasks | filter: false:isCompleted">
+<div ng-repeat="thingy in tasks | filter: false:isCompleted | filter: searchText.search">
     <div class="panel panel-default" ng-hide="thingy.isCompleted">
         <div class="panel-body">
             <div class="col-xs-1"><input type="checkbox" ng-model="thingy.isCompleted" ng-change="toggleDoneTask(thingy)"/></div>
@@ -24,7 +24,7 @@
 </div>
 
 <h3>Completed</h3>
-<div ng-repeat="thingy in tasks | filter: {isCompleted: true}">
+<div ng-repeat="thingy in tasks | filter: {isCompleted: true} | filter: searchText.search">
     <div class="panel panel-default">
         <div class="panel-body">
             <div class="col-xs-1"><input type="checkbox" ng-model="thingy.isCompleted" ng-change="toggleDoneTask(thingy)"/></div>

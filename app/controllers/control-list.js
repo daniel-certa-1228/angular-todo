@@ -4,10 +4,12 @@
     handle data and functionality needed in list.html
     using todoFactory and userFactory to interact with the database
  */
-app.controller("listCtrl", function($scope, todoFactory, userFactory) {
+app.controller("listCtrl", function($scope, todoFactory, userFactory, filterFactory, $rootScope) {
 
 	$scope.tasks = [];
     let user = userFactory.getCurrentUser();
+    $rootScope.showSearch = true;
+    $scope.searchText = filterFactory;
 
     const showAllTasks = function(){
     	todoFactory.getAllTasks(user)
