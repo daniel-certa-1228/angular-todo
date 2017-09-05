@@ -1,8 +1,10 @@
 "use strict";
 // console.log( "control-navbar.js" );
 
-app.controller("navCtrl", function($scope, $window, userFactory) {
-	$scope.isLoggedIn = false;
+app.controller("navCtrl", function($scope, $window, userFactory, filterFactory) {
+	
+  $scope.searchText = filterFactory;
+  $scope.isLoggedIn = false;
 
 	$scope.logout = () => {
         userFactory.logOut();
@@ -21,6 +23,8 @@ app.controller("navCtrl", function($scope, $window, userFactory) {
     }
   });
 
+});
+
    //when first loaded, make sure no one is logged in
   // // console.log("what is this?", userFactory.isAuthenticated());
   // if (userFactory.isAuthenticated()) 
@@ -30,7 +34,3 @@ app.controller("navCtrl", function($scope, $window, userFactory) {
 //   if (isAuth()){
 //     console.log("app isAuth", isAuth());
 //   }
-
-
-});
-

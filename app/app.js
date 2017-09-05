@@ -60,4 +60,10 @@ app.run(($location, FBCreds) => {
 	};
 
 	firebase.initializeApp(authConfig);
+
+	//// $rootScope is a global variable
+
+	app.run(function($rootScope) {
+		$rootScope.showSerch = false;
+	});
 });
